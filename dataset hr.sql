@@ -93,7 +93,7 @@ group by city;
 select city, count(*) as jml_pegawai from office
 group by city;
 
--- Menampilkan jumlah budget untuk gaji pegawai
+-- menghitung jumlah gaji pegawai mulai dari >4000.000
 select sum(salary) as jml_gaji from employee
 where salary>4000000;
 
