@@ -30,22 +30,16 @@ insert into office values
 (017,"Jalan Kepatihan","Gresik","Surabaya"),
 (018,"Jalan Ahmad Yani","Surabaya","Indonesia");
 
-
 create table employee(
 employeeID int not null primary key,
 name varchar(70) not null,
 job_title varchar(55) not null,
 salary int not null,
-reports int default null,
 officeID int not null,
 key fk_emp_officeID (officeID),
 key fk_emp_employeeID (reports),
-constraint fk_emp_manager foreign key (reports) references employee (employeeID),
 constraint fk_emp_office foreign key (officeID) references office (officeID)
 );
-
-alter table employee drop foreign key fk_emp_manager;
-alter table employee drop reports;
 
 insert into employee values
 (10111,"Lily Irawan","Editor",5500000,001),
@@ -81,7 +75,7 @@ select name,salary from employee
 where salary>=4650000
 order by salary asc;
 
--- Menampilkan nama yang berasal dari kota Surabaya
+-- Menampilkan nama pegawai yang berasal dari kota Surabaya
 select employee.name,office.city from employee join office on employee.officeID=office.officeID
 where city="Surabaya"
 order by name asc;
