@@ -67,47 +67,51 @@ insert into employee values
 (91711,"Ami Hidayat","Pelayan",4450000,017),
 (91812,"Mega Gundono","Pelayan",4450000,018);
 
-select name,salary from employee
-where salary>=4650000
-order by salary asc;
-
+-- Memperbarui kesalahan input
 update employee set salary = 4500000 where name="Hendra Pramono";
 update employee set salary = 4900000 where name="Kila Khoirina";
 
 update employee set officeID=009 where name="Melinda Suprowo";
 update employee set officeID=0014 where name="Salam Qonitatun";
 
-update office set addres="Jalan Wonocol" where officeID=002;
+update office set addres="Jalan Wonocolo" where officeID=002;
 
-select employee.name, office.city from employee, office
-where city="Surabaya"
-order by name asc;
+-- Menampilkan nama pegawai dan gaji di mana gaji > 4.650.000 (diurutkan dari yang terkecil)
+select name,salary from employee
+where salary>=4650000
+order by salary asc;
 
+-- Menampilkan nama yang berasal dari kota Surabaya
 select employee.name,office.city from employee join office on employee.officeID=office.officeID
 where city="Surabaya"
 order by name asc;
 
+-- Menampilkan jumlah pegawai dari Surabaya
 select city, count(*) as jml_pegawai from office
 where city="Surabaya" ;
 
+-- Menampilkan jumlah pegawai dari Surabaya dan Gresik
 select city, count(*) as jml_pegawai from office
 where city in ("Surabaya","Gresik")
 group by city;
 
+-- Menampilkan jumlah pegawai dari setiap kota
 select city, count(*) as jml_pegawai from office
 group by city;
 
+-- Menampilkan jumlah budget untuk gaji pegawai
 select sum(salary) as jml_gaji from employee
 where salary>4000000;
 
+-- Menampilkan informasi pegawai dengan office id 1,5,9,13,14
 (select * from employee limit 1 offset 0)
-union all
+union
 (select * from employee limit 1 offset 4)
-union all
+union
 (select * from employee limit 1 offset 8)
-union all
+union
 (select * from employee limit 1 offset 12)
-union all
+union
 (select * from employee limit 1 offset 13);
 
 select*from office;
